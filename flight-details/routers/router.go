@@ -15,6 +15,5 @@ func init() {
 
 	beego.AddNamespace(ns)
 	beego.Router("/swagger/*", &controllers.SwaggerController{})
+  web.Router("/api/v1/flights/search", &controllers.FlightController{}, "get:GetByAllParams")
 }
-
-//this is comment
