@@ -16,3 +16,5 @@ func init() {
 	beego.AddNamespace(ns)
 	beego.Router("/swagger/*", &controllers.SwaggerController{})
 }
+
+//this is comment
