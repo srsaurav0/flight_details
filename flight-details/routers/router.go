@@ -1,15 +1,19 @@
 package routers
 
 import (
-	"flight-details/controllers"
-
-	"github.com/beego/beego/v2/server/web"
+	"flight_details/controllers"
+	beego "github.com/beego/beego/v2/server/web"
 )
 
 func init() {
-	// Route for flight search
-	web.Router("/api/v1/flights/search", &controllers.FlightController{}, "get:GetByAllParams")
+	ns := beego.NewNamespace("/v1",
+		beego.NSNamespace("/api",
+			beego.NSRouter("/:id", &controllers.FlightController{}, "get:GetFlightDetails"),
+		),
 
-	// Register the Swagger UI endpoint
-	web.Router("/swagger/*", &controllers.SwaggerController{})
+	)
+
+	beego.AddNamespace(ns)
+	beego.Router("/swagger/*", &controllers.SwaggerController{})
+  web.Router("/api/v1/flights/search", &controllers.FlightController{}, "get:GetByAllParams")
 }
